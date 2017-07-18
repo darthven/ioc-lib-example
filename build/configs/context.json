@@ -1,0 +1,64 @@
+{
+  "configuration": {
+    "components": [
+      {
+        "id": "user",
+        "name": "USER",
+        "classPath": "build/entities/User.js",
+        "scope": "singleton",
+        "properties": [
+          {
+            "name": "name",
+            "value": "John Smith"
+          },
+          {
+            "name": "age",
+            "value": 23
+          },
+          {
+            "name": "phoneNumbers",
+            "value": [
+              "12312312",
+              "41241412",
+              "45788943"
+            ]
+          },
+          {
+            "name": "service",
+            "reference": "service"
+          }
+        ],
+        "lifecycle": {
+          "preInitMethod" : "preInitUser",
+          "postInitMethod": "postInitUser",
+          "beforePropertiesWillBeSetMethod": "beforePropertiesWereSetToUser",
+          "afterPropertiesWereSetMethod": "afterPropertiesWereSetToUser",
+          "preDestroyMethod": "preDestroyUser",
+          "postDestroyMethod": "postDestroyUser"
+        }
+      },
+
+      {
+        "id": "service",
+        "name": "SERVICE",
+        "classPath": "build/services/Service.js",
+        "scope": "prototype",
+        "properties": [
+          {
+            "name": "name",
+            "value": "Mobile Service Test"
+          },
+          {
+            "name": "price",
+            "value": 12345.53
+          }
+        ],
+        "lifecycle": {
+          "preInitMethod": "preInitService",
+          "afterPropertiesWereSetMethod": "afterPropertiesWereSetToService",
+          "preDestroyMethod": "preDestroyService"
+        }
+      }
+    ]
+  }
+}

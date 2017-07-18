@@ -1,0 +1,16 @@
+{
+  "name": "lib-test",
+  "version": "0.0.1",
+  "description": "none",
+  "main": "index.js",
+  "author": "darthvenus",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^8.0.3",
+    "ioc-lib.js": "latest",
+    "typescript": "^2.3.4"
+  },
+  "scripts": {
+    "test-components": "node ./build/index.js"
+  }
+}
