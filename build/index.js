@@ -16,5 +16,5 @@ var userFromContext = context.getComponentEntityInstance('user');
 var service = new Service_1.default("Test service", 1455);
 //Creating simple object of User class and inject service via constructor
 var user = new User_1.default("Darthven", 25, ["066-240-52-63"], service);
-console.log("User created by the application context: " + userFromContext);
-console.log("User created by own hands: " + user);
+console.log("User created by the application context:\n " + JSON.stringify(userFromContext, null, 4));
+console.log("User created by own hands:\n " + JSON.stringify(user, null, 4));
