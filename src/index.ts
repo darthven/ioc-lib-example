@@ -1,4 +1,4 @@
-import {MetadataContext} from 'ioc-lib.js/dist'
+import {MetadataContext} from 'ioc-lib.js'
 import User from "./entities/User";
 import Service from "./services/Service";
 const path = require('path');
@@ -14,6 +14,7 @@ context.registerShutdownHook();
 
 //Getting user's component instance from the application context
 let userFromContext = context.getComponentEntityInstance('user');
+let serviceFromContext = context.getComponentEntityInstance('service');
 
 //Creeating simple object of Service class
 let service = new Service("Test service", 1455);
@@ -21,5 +22,10 @@ let service = new Service("Test service", 1455);
 //Creating simple object of User class and inject service via constructor
 let user = new User("Darthven", 25, ["066-240-52-63"], service);
 
+
+console.log(`Service created by the application context:\n ${JSON.stringify(serviceFromContext, null, 4)}`);
+console.log(`Service created by own hands:\n ${JSON.stringify(service, null, 4)}`);
+
 console.log(`User created by the application context:\n ${JSON.stringify(userFromContext, null, 4)}`);
 console.log(`User created by own hands:\n ${JSON.stringify(user, null, 4)}`);
+

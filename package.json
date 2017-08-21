@@ -11,6 +11,7 @@
     "typescript": "^2.3.4"
   },
   "scripts": {
-    "test-components": "node ./build/index.js"
+    "tsc": "tsc -w",
+    "start": "node ./build/index.js"
   }
 }
