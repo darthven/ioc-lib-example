@@ -1,31 +1,20 @@
-import {MetadataContext} from 'ioc-lib.js'
-import User from "./entities/User";
-import Service from "./services/Service";
-const path = require('path');
+import {DecoratorContext} from 'ioc-lib.js'
+import Configuration from "./config/Configuration"
+import Admin from "./entities/Admin";
 
-//Paths to the configuration files with metadata
-const configs = [__dirname + "/configs/context.json"];
+//Passing configuration classes here
+const configs = [Configuration];
 
-//Creating application context based on metadata
-let context = new MetadataContext(configs);
+//Creating decorator's context based on this configuration
+let decoratorCtx = new DecoratorContext([Configuration]);
 
 //Providing safe close for the application context
-context.registerShutdownHook();
+decoratorCtx.registerShutdownHook();
 
-//Getting user's component instance from the application context
-let userFromContext = context.getComponentEntityInstance('user');
-let serviceFromContext = context.getComponentEntityInstance('service');
+//Retrieving admin component instance from the context by the class name
+const admin = decoratorCtx.getComponentEntityInstanceByClass(Admin);
+console.log(`Admin from decorator's context:\n${JSON.stringify(admin, null, 4)}`);
 
-//Creeating simple object of Service class
-let service = new Service("Test service", 1455);
-
-//Creating simple object of User class and inject service via constructor
-let user = new User("Darthven", 25, ["066-240-52-63"], service);
-
-
-console.log(`Service created by the application context:\n ${JSON.stringify(serviceFromContext, null, 4)}`);
-console.log(`Service created by own hands:\n ${JSON.stringify(service, null, 4)}`);
-
-console.log(`User created by the application context:\n ${JSON.stringify(userFromContext, null, 4)}`);
-console.log(`User created by own hands:\n ${JSON.stringify(user, null, 4)}`);
-
+//Retrieving user component instance from the context by the unique identifier
+const user = decoratorCtx.getComponentEntityInstanceById('userWithName');
+console.log(`User from decorator's context:\n${JSON.stringify(user, null, 4)}`);

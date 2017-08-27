@@ -1,24 +1,11 @@
-import Service from "../services/Service";
+import {preInit, preDestroy} from "ioc-lib.js"
 
-class User {
+export default class User {
 
     private _name: string;
 
-    private _age: number;
-
-    private _phoneNumbers: string[];
-
-    private _service: Service;
-
-    constructor();
-
-    constructor(name: string, age: number, phoneNumbers: string[], service: Service);
-
-    constructor(name?: string, age?: number, phoneNumbers?: string[], service?: Service) {
-        this._name = name || null;
-        this._age = age || 0;
-        this._phoneNumbers = phoneNumbers || [];
-        this._service = service || null;
+    constructor(name?: string) {
+        this._name = name;
     }
 
     get name(): string {
@@ -29,53 +16,17 @@ class User {
         this._name = value;
     }
 
-    get age(): number {
-        return this._age;
-    }
+    @preInit
+    public initUser(): void {
+        console.log("BEFORE Init user");
+    };
 
-    set age(value: number) {
-        this._age = value;
-    }
+    @preDestroy
+    public destroyUser(): void {
+        console.log("BEFORE Destroy user");
+    };
 
-    get phoneNumbers(): string[] {
-        return this._phoneNumbers;
-    }
-
-    set phoneNumbers(value: string[]) {
-        this._phoneNumbers = value;
-    }
-
-    get service(): Service {
-        return this._service;
-    }
-
-    set service(value: Service) {
-        this._service = value;
-    }
-
-    public preInitUser(): void {
-        console.log('BEFORE User will be initialized');
-    }
-
-    public postInitUser(): void {
-        console.log('AFTER User will be initialized');
-    }
-
-    public beforePropertiesWereSetToUser(): void {
-        console.log('BEFORE User received its props');
-    }
-
-    public afterPropertiesWereSetToUser(): void {
-        console.log('AFTER User received its props');
-    }
-
-    public preDestroyUser(): void {
-        console.log('BEFORE User will be destroyed');
-    }
-
-    public postDestroyUser(): void {
-        console.log('AFTER User will be destroyed');
-    }
+    public hello(): void {
+        console.log('Hello from User');
+    };
 }
-
-export default User;
